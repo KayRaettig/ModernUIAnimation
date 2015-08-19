@@ -17,8 +17,8 @@ namespace ModernAnimationTest
 
         private static AnimationType inAnimationType = AnimationType.Unspecified;
         private static AnimationType outAnimationType = AnimationType.Unspecified;
-        private static InAnimation inAnim = InAnimation.Unspecified;
-        private static OutAnimation outAnim = OutAnimation.Unspecified;
+        private static AnimationDirection inAnim = AnimationDirection.Unspecified;
+        private static AnimationDirection outAnim = AnimationDirection.Unspecified;
         private static FrameworkElement target = null;
         private static Storyboard outAnimation = null;
 
@@ -60,12 +60,12 @@ namespace ModernAnimationTest
 
 
 
-        public static InAnimation GetInAnimation(DependencyObject obj)
+        public static AnimationDirection GetInAnimation(DependencyObject obj)
         {
-            return (InAnimation)obj.GetValue(InAnimationProperty);
+            return (AnimationDirection)obj.GetValue(InAnimationProperty);
         }
 
-        public static void SetInAnimation(DependencyObject obj, InAnimation value)
+        public static void SetInAnimation(DependencyObject obj, AnimationDirection value)
         {
             obj.SetValue(InAnimationProperty, value);
         }
@@ -75,15 +75,15 @@ namespace ModernAnimationTest
 
         // Using a DependencyProperty as the backing store for InAnimation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InAnimationProperty =
-            DependencyProperty.RegisterAttached("InAnimation", typeof(InAnimation), typeof(AnimationStuff), new PropertyMetadata(null));
+            DependencyProperty.RegisterAttached("InAnimation", typeof(AnimationDirection), typeof(AnimationStuff), new PropertyMetadata(null));
 
 
-        public static OutAnimation GetOutAnimation(DependencyObject obj)
+        public static AnimationDirection GetOutAnimation(DependencyObject obj)
         {
-            return (OutAnimation)obj.GetValue(OutAnimationProperty);
+            return (AnimationDirection)obj.GetValue(OutAnimationProperty);
         }
 
-        public static void SetOutAnimation(DependencyObject obj, OutAnimation value)
+        public static void SetOutAnimation(DependencyObject obj, AnimationDirection value)
         {
             obj.SetValue(OutAnimationProperty, value);
         }
@@ -93,7 +93,7 @@ namespace ModernAnimationTest
 
         // Using a DependencyProperty as the backing store for OutAnimation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OutAnimationProperty =
-            DependencyProperty.RegisterAttached("OutAnimation", typeof(OutAnimation), typeof(AnimationStuff), new PropertyMetadata(null));
+            DependencyProperty.RegisterAttached("AnimationDirection", typeof(AnimationDirection), typeof(AnimationStuff), new PropertyMetadata(null));
 
 
         public static bool GetTurnOnAnimation(DependencyObject obj)

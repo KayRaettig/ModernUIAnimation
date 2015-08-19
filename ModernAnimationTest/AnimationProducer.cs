@@ -54,7 +54,7 @@ namespace ModernAnimationTest
 
         }
 
-        public static Storyboard GetInAnimation(AnimationType inAnimationType, InAnimation inAnimation)
+        public static Storyboard GetInAnimation(AnimationType inAnimationType, AnimationDirection inAnimation)
         {
             if (!isInitialized)
                 Initialize();
@@ -66,19 +66,19 @@ namespace ModernAnimationTest
 
             switch (inAnimation)
             {
-                case InAnimation.Bottom:
+                case AnimationDirection.Bottom:
                     InwardsBottom.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(yAxis));
                     (story as IAddChild).AddChild(InwardsBottom);
                     break;
-                case InAnimation.Left:
+                case AnimationDirection.Left:
                     InwardsLeft.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(xAxis));
                     (story as IAddChild).AddChild(InwardsLeft);
                     break;
-                case InAnimation.Right:
+                case AnimationDirection.Right:
                     break;
-                case InAnimation.Top:
+                case AnimationDirection.Top:
                     break;
-                case InAnimation.Unspecified:
+                case AnimationDirection.Unspecified:
                 default:
                     break;
             }
@@ -86,7 +86,7 @@ namespace ModernAnimationTest
             return story;
         }
 
-        public static Storyboard GetOutAnimation(AnimationType outAnimationType, OutAnimation outAnimation)
+        public static Storyboard GetOutAnimation(AnimationType outAnimationType, AnimationDirection outAnimation)
         {
             if (!isInitialized)
                 Initialize();
@@ -97,7 +97,7 @@ namespace ModernAnimationTest
 
             switch (outAnimation)
             {
-                case OutAnimation.Right:
+                case AnimationDirection.Right:
                     OutwardsRight.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(xAxis));
                     (story as IAddChild).AddChild(OutwardsRight);
                     break;

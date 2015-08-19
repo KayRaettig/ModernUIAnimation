@@ -2,21 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:at="clr-namespace:ModernAnimationTest"
+        xmlns:l="http://schemas.microsoft.com/expression/2010/interactivity"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel x:Name="panel" >
-            <TextBlock Text="Test"
-                    at:AnimationStuff.InAnimation="Left"
-                    at:AnimationStuff.InAnimationType="In"
-                    at:AnimationStuff.OutAnimationType="Out"
-                    at:AnimationStuff.OutAnimation="Right"
-                    at:AnimationStuff.TurnOnAnimation="True"/>
-            <Button Height="25" Width="50" Content="..." x:Name="target"
-                    at:AnimationStuff.InAnimation="Left"
-                    at:AnimationStuff.InAnimationType="In"
-                    at:AnimationStuff.OutAnimationType="Out"
-                    at:AnimationStuff.OutAnimation="Right"
-                    at:AnimationStuff.TurnOnAnimation="True"/>
+            <TextBlock Text="Test"/>
+            <Button Height="25" Width="50" Content="..." x:Name="target">
+                <l:Interaction.Behaviors>
+                    <at:AnimationBehavior InAnimation="Left" InAnimationType="In" OutAnimation="Right" OutAnimationType="Out"/>
+                </l:Interaction.Behaviors>
+            </Button>
         </StackPanel>
         <Button Height="25" Content="remove" Click="Button_Click" />
     </Grid>

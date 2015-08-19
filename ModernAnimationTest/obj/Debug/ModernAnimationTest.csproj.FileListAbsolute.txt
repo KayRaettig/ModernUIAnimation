@@ -12,3 +12,28 @@ C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernA
 C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest.exe
 C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest.pdb
 C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.exe
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.pdb
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\ModernAnimationTest.exe
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\ModernAnimationTest.pdb
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\System.Windows.Interactivity.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\System.Windows.Interactivity.xml
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\de\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\en\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\es\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\it\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.csprojResolveAssemblyReference.cache
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\MainWindow.g.cs
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\App.g.cs
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest_MarkupCompile.cache
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest_MarkupCompile.lref
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\MainWindow.baml
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.g.resources
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.Properties.Resources.resources
+D:\Users\Kay Raettig\Desktop\modernui\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.csproj.GenerateResource.Cache

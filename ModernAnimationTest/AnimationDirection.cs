@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ModernAnimationTest
 {
-    public enum InAnimation
+    public enum AnimationDirection
     {
         Unspecified,
         Left,
