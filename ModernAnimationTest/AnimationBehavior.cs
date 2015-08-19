@@ -58,8 +58,15 @@ namespace ModernAnimationTest
             (_parent as IAddChild).AddChild(_self);
             AssociatedObject.BeginStoryboard(AnimationProducer.GetOutAnimation(OutAnimationType, OutAnimation));
 
-            
 
+            var children = VisualTreeHelper.GetChildrenCount(_parent);
+            for (int i = children; i < 0; i--)
+            {
+                if (VisualTreeHelper.GetChild(_parent, i) == _self)
+                {
+                    
+                }
+            }
 
             Detach();
         }
