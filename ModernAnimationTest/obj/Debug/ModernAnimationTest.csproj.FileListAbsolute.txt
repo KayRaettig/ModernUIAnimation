@@ -1,0 +1,14 @@
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\bin\Debug\ModernAnimationTest.exe
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\bin\Debug\ModernAnimationTest.pdb
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest.csprojResolveAssemblyReference.cache
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\MainWindow.g.cs
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\App.g.cs
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest_MarkupCompile.cache
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest_MarkupCompile.lref
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\MainWindow.baml
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest.g.resources
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest.Properties.Resources.resources
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest.csproj.GenerateResource.Cache
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest.exe
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\ModernAnimationTest.pdb
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernAnimationTest\ModernAnimationTest\obj\Debug\GeneratedInternalTypeHelper.g.cs
