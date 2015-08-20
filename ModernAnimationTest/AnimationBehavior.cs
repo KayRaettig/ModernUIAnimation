@@ -60,13 +60,14 @@ namespace ModernAnimationTest
 
 
             var children = VisualTreeHelper.GetChildrenCount(_parent);
-            for (int i = children; i < 0; i--)
-            {
-                if (VisualTreeHelper.GetChild(_parent, i) == _self)
-                {
-                    
-                }
-            }
+            
+if (AssociatedObject is Panel)
+{
+(AssociatedObject as Panel).Children.Remove (_self);
+}
+            
+            
+            
 
             Detach();
         }
