@@ -31,7 +31,7 @@ namespace ModernAnimationTest
 
         private static DoubleAnimation OutwardsRight = new DoubleAnimation(0, 60, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
 
-
+private static DoubleAnimation OutwardsLeft = new DoubleAnimation (0, -60, new Duration (new TimeSpan (0, 0, 0, 0, 500)));
         public static void Initialize()
         {
             OpacIn.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(opacityString));
