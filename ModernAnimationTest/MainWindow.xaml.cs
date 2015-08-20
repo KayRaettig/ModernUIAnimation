@@ -26,7 +26,17 @@ namespace ModernAnimationTest
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            panel.Children.Clear();
+            //panel.Children.Clear();
+            mainRoot.Children.RemoveAt(0);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var mwnd = new MainWindow();
+            mwnd.Show();
         }
     }
 }

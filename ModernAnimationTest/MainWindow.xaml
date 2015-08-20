@@ -4,15 +4,18 @@
         xmlns:at="clr-namespace:ModernAnimationTest"
         xmlns:l="http://schemas.microsoft.com/expression/2010/interactivity"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <StackPanel x:Name="panel" >
-            <TextBlock Text="Test"/>
-            <Button Height="25" Width="50" Content="..." x:Name="target">
-                <l:Interaction.Behaviors>
-                    <at:AnimationBehavior InAnimation="Left" InAnimationType="In" OutAnimation="Right" OutAnimationType="Out"/>
-                </l:Interaction.Behaviors>
-            </Button>
+    <Grid x:Name="mainRoot">
+        <StackPanel x:Name="panel">
+            <l:Interaction.Behaviors>
+                <at:AnimationBehavior InAnimation="Left" InAnimationType="In" OutAnimation="Right" OutAnimationType="Out"/>
+            </l:Interaction.Behaviors>
+            <TextBlock Text="some ui caption"
+                       Margin="15"
+                       FontSize="40"
+                       FontFamily="Segoe UI Light"/>
+            <Button Height="25" Width="200" Content="And a non functional button" x:Name="target"/>
         </StackPanel>
         <Button Height="25" Content="remove" Click="Button_Click" />
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
     </Grid>
 </Window>

@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interactivity;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace ModernAnimationTest
 {
@@ -19,6 +23,7 @@ namespace ModernAnimationTest
 
         private DependencyObject _parent = null;
         private FrameworkElement _self = null;
+        private Storyboard _story = null;
 
         protected override void OnAttached()
         {
@@ -28,48 +33,96 @@ namespace ModernAnimationTest
         }
 
 
+
+
         protected override void OnDetaching()
         {
             AssociatedObject.Loaded -= AssociatedObject_Loaded;
-            AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
-            source.ContentRendered -= source_ContentRendered;
             _parent = null;
             _self = null;
+            _story = null;
+            source = null;
             base.OnDetaching();
+            
         }
 
 
         void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
+            if (_self != null)
+            {
+                AssociatedObject.Loaded -= AssociatedObject_Loaded;
+                return;
+            }
             source = PresentationSource.FromVisual(sender as Visual);
             source.ContentRendered += source_ContentRendered;
+
+
         }
+
 
         void source_ContentRendered(object sender, EventArgs e)
         {
+            source.ContentRendered -= source_ContentRendered;
+            source = null;
+
             _parent = VisualTreeHelper.GetParent(AssociatedObject);
             _self = AssociatedObject;
-            AssociatedObject.RenderTransform = new TranslateTransform();
-            AssociatedObject.BeginStoryboard(AnimationProducer.GetInAnimation(InAnimationType, InAnimation));
+            _self.RenderTransform = new TranslateTransform();
+            _self.BeginStoryboard(AnimationProducer.GetInAnimation(InAnimationType, InAnimation));
+
+            
+
         }
 
         void AssociatedObject_Unloaded(object sender, RoutedEventArgs e)
         {
+            AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
+
+
+
             (_parent as IAddChild).AddChild(_self);
-            AssociatedObject.BeginStoryboard(AnimationProducer.GetOutAnimation(OutAnimationType, OutAnimation));
-
-
-            var children = VisualTreeHelper.GetChildrenCount(_parent);
-            
-if (AssociatedObject is Panel)
-{
-(AssociatedObject as Panel).Children.Remove (_self);
-}
-            
-            
             
 
+            _story = AnimationProducer.GetOutAnimation(OutAnimationType, OutAnimation);
+            _story.Completed += story_Completed;
+
+            
+            AssociatedObject.BeginStoryboard(_story);
+        }
+
+        void story_Completed(object sender, EventArgs e)
+        {
+            _story.Completed -= story_Completed;
+            _story = null;
+
+            if (_parent is Panel)
+            {
+                (_parent as Panel).Children.Remove((UIElement)_self);
+            }
+
+            if (_parent is ItemsControl)
+            {
+                (_parent as ItemsControl).Items.Remove(_self);
+            }
+
+            if (_parent is ContentControl)
+            {
+                // interface ???
+            }
+
+            if (_parent is IRemoveChild)
+            {
+                (_parent as IRemoveChild).RemoveChild(_self);
+            }
+
+            _self = null;
             Detach();
+        }
+
+        ~AnimationBehavior()
+        {
+            Console.WriteLine("Behavior collected!");
         }
     }
 }
