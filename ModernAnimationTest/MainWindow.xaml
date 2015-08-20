@@ -7,7 +7,7 @@
     <Grid x:Name="mainRoot">
         <StackPanel x:Name="panel">
             <l:Interaction.Behaviors>
-                <at:AnimationBehavior InAnimation="Left" InAnimationType="In" OutAnimation="Right" OutAnimationType="Out"/>
+                <at:AnimationBehavior InAnimation="Bottom" InAnimationType="In" OutAnimation="Bottom" OutAnimationType="Out"/>
             </l:Interaction.Behaviors>
             <TextBlock Text="some ui caption"
                        Margin="15"

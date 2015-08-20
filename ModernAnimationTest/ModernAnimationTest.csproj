@@ -60,7 +60,6 @@
     </Page>
     <Compile Include="AnimationBehavior.cs" />
     <Compile Include="AnimationProducer.cs" />
-    <Compile Include="AnimationStuff.cs" />
     <Compile Include="AnimationType.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

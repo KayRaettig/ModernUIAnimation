@@ -16,22 +16,26 @@ namespace ModernAnimationTest
         static string xAxis = "RenderTransform.(TranslateTransform.X)";
         static string yAxis = "RenderTransform.(TranslateTransform.Y)";
 
+        static int animationTime = 500;
+
         public static bool isInitialized = false;
 
-        private static DoubleAnimation OpacIn = new DoubleAnimation(0, 1, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-        private static DoubleAnimation OpacOut = new DoubleAnimation(1, 0, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
+        private static DoubleAnimation OpacIn = new DoubleAnimation(0, 1, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
+        private static DoubleAnimation OpacOut = new DoubleAnimation(1, 0, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
 
 
-        private static DoubleAnimation InwardsLeft = new DoubleAnimation(-30, 0, new Duration(new TimeSpan(0, 0, 0, 0, 500))) {EasingFunction = new ExponentialEase()};
-        // Rather experimental
-        private static DoubleAnimation InwardsRight = new DoubleAnimation(60, 0, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-        private static DoubleAnimation InwardsTop = new DoubleAnimation(60, 0, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-        private static DoubleAnimation InwardsBottom = new DoubleAnimation(-30, 0, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
+        private static DoubleAnimation InwardsLeft = new DoubleAnimation(-30, 0, new Duration(new TimeSpan(0, 0, 0, 0, animationTime))) { EasingFunction = new ExponentialEase() };
+        private static DoubleAnimation InwardsRight = new DoubleAnimation(30, 0, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
+        private static DoubleAnimation InwardsTop = new DoubleAnimation(-30, 0, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
+        private static DoubleAnimation InwardsBottom = new DoubleAnimation(30, 0, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
 
 
-        private static DoubleAnimation OutwardsRight = new DoubleAnimation(0, 60, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
+        private static DoubleAnimation OutwardsLeft = new DoubleAnimation(0, -30, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
+        private static DoubleAnimation OutwardsRight = new DoubleAnimation(0, 30, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
+        private static DoubleAnimation OutwardsTop = new DoubleAnimation(0, -30, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
+        private static DoubleAnimation OutwardBottom = new DoubleAnimation(0, 30, new Duration(new TimeSpan(0, 0, 0, 0, animationTime)));
 
-private static DoubleAnimation OutwardsLeft = new DoubleAnimation (0, -60, new Duration (new TimeSpan (0, 0, 0, 0, 500)));
+
         public static void Initialize()
         {
             OpacIn.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(opacityString));
@@ -41,18 +45,46 @@ private static DoubleAnimation OutwardsLeft = new DoubleAnimation (0, -60, new D
             isInitialized = true;
         }
 
-
-        public static DoubleAnimation GetDoubleAnimation(AnimationType animationType)
+        public static Storyboard GetAnimation(AnimationType animationType, AnimationDirection animationDirection, bool? isInAnimation)
         {
-            if(animationType == AnimationType.In)
-            return OpacIn;
+            if (!isInitialized)
+                Initialize();
 
-            if (animationType == AnimationType.Out)
-                return OpacOut;
+            var story = new Storyboard();
 
-            return null;
 
+            if (animationType == AnimationType.In)
+            {
+                (story as IAddChild).AddChild(OpacIn);
+            }
+            else if (animationType == AnimationType.Out)
+            {
+                (story as IAddChild).AddChild(OpacOut);
+            }
+            
+
+            DoubleAnimation anim = null;
+
+            if (isInAnimation == true)
+            {
+                anim = new DoubleAnimation(animationDirection == AnimationDirection.Left || animationDirection == AnimationDirection.Top ? -30 : 30, 0, new Duration(new TimeSpan(0, 0, 0, 0, animationTime))) { EasingFunction = new ExponentialEase() };
+            }
+            else if(isInAnimation == false)
+            {
+                anim = new DoubleAnimation(0, animationDirection == AnimationDirection.Left || animationDirection == AnimationDirection.Top ? -30 : 30, new Duration(new TimeSpan(0, 0, 0, 0, animationTime))) { EasingFunction = new ExponentialEase() };
+            }
+
+            if (anim != null)
+            {
+                anim.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(animationDirection == AnimationDirection.Left || animationDirection == AnimationDirection.Right ? xAxis : yAxis));
+                (story as IAddChild).AddChild(anim);
+            }
+
+
+            return story;
         }
+
+
 
         public static Storyboard GetInAnimation(AnimationType inAnimationType, AnimationDirection inAnimation)
         {
@@ -75,8 +107,12 @@ private static DoubleAnimation OutwardsLeft = new DoubleAnimation (0, -60, new D
                     (story as IAddChild).AddChild(InwardsLeft);
                     break;
                 case AnimationDirection.Right:
+                    InwardsRight.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(xAxis));
+                    (story as IAddChild).AddChild(InwardsRight);
                     break;
                 case AnimationDirection.Top:
+                    InwardsTop.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(yAxis));
+                    (story as IAddChild).AddChild(InwardsTop);
                     break;
                 case AnimationDirection.Unspecified:
                 default:
@@ -100,6 +136,18 @@ private static DoubleAnimation OutwardsLeft = new DoubleAnimation (0, -60, new D
                 case AnimationDirection.Right:
                     OutwardsRight.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(xAxis));
                     (story as IAddChild).AddChild(OutwardsRight);
+                    break;
+                case AnimationDirection.Bottom:
+                    OutwardBottom.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(yAxis));
+                    (story as IAddChild).AddChild(OutwardBottom);
+                    break;
+                case AnimationDirection.Top:
+                    OutwardsTop.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(yAxis));
+                    (story as IAddChild).AddChild(OutwardsTop);
+                    break;
+                case AnimationDirection.Left:
+                    OutwardsLeft.SetValue(Storyboard.TargetPropertyProperty, new PropertyPath(xAxis));
+                    (story as IAddChild).AddChild(OutwardsLeft);
                     break;
             }
 

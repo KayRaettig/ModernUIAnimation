@@ -108,7 +108,7 @@ namespace ModernAnimationTest
 
             if (_parent is ContentControl)
             {
-                // interface ???
+
             }
 
             if (_parent is IRemoveChild)
