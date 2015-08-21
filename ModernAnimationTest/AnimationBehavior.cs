@@ -20,10 +20,18 @@ namespace ModernAnimationTest
         public AnimationType OutAnimationType { get; set; }
         public AnimationDirection InAnimation { get; set; }
         public AnimationDirection OutAnimation { get; set; }
+        public int AnimationTimeMS { get; set; }
+
 
         private DependencyObject _parent = null;
         private FrameworkElement _self = null;
         private Storyboard _story = null;
+
+        public AnimationBehavior()
+        {
+            AnimationTimeMS = 500;
+        }
+
 
         protected override void OnAttached()
         {
@@ -31,8 +39,6 @@ namespace ModernAnimationTest
             AssociatedObject.Unloaded += AssociatedObject_Unloaded;
             base.OnAttached();
         }
-
-
 
 
         protected override void OnDetaching()
@@ -64,14 +70,13 @@ namespace ModernAnimationTest
         void source_ContentRendered(object sender, EventArgs e)
         {
             source.ContentRendered -= source_ContentRendered;
-            source = null;
 
             _parent = VisualTreeHelper.GetParent(AssociatedObject);
             _self = AssociatedObject;
             _self.RenderTransform = new TranslateTransform();
-            _self.BeginStoryboard(AnimationProducer.GetInAnimation(InAnimationType, InAnimation));
+            _self.BeginStoryboard(AnimationProducer.GetAnimation(InAnimationType, InAnimation, true, AnimationTimeMS));
 
-            
+
 
         }
 
@@ -79,16 +84,17 @@ namespace ModernAnimationTest
         {
             AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
 
-
-
-            (_parent as IAddChild).AddChild(_self);
-            
-
-            _story = AnimationProducer.GetOutAnimation(OutAnimationType, OutAnimation);
-            _story.Completed += story_Completed;
-
-            
-            AssociatedObject.BeginStoryboard(_story);
+            if (source != null && source.CompositionTarget != null)
+            {
+                (_parent as IAddChild).AddChild(_self);
+                _story = AnimationProducer.GetAnimation(OutAnimationType, OutAnimation, false, AnimationTimeMS);
+                _story.Completed += story_Completed;
+                AssociatedObject.BeginStoryboard(_story);
+            }
+            else // window is gone
+            {
+                Detach();
+            }
         }
 
         void story_Completed(object sender, EventArgs e)
@@ -104,11 +110,6 @@ namespace ModernAnimationTest
             if (_parent is ItemsControl)
             {
                 (_parent as ItemsControl).Items.Remove(_self);
-            }
-
-            if (_parent is ContentControl)
-            {
-
             }
 
             if (_parent is IRemoveChild)
