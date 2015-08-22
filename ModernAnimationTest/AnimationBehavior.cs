@@ -16,16 +16,15 @@ namespace ModernAnimationTest
     public class AnimationBehavior : Behavior<FrameworkElement>
     {
         private PresentationSource source = null;
-        public AnimationType InAnimationType { get; set; }
-        public AnimationType OutAnimationType { get; set; }
-        public AnimationDirection InAnimation { get; set; }
-        public AnimationDirection OutAnimation { get; set; }
-        public int AnimationTimeMS { get; set; }
-
-
         private DependencyObject _parent = null;
         private FrameworkElement _self = null;
         private Storyboard _story = null;
+
+        public AnimationDirection? InAnimation { get; set; }
+        public AnimationDirection? OutAnimation { get; set; }
+        public int AnimationTimeMS { get; set; }
+        public IEasingFunction EasingFunction { get; set; }
+
 
         public AnimationBehavior()
         {
@@ -74,7 +73,7 @@ namespace ModernAnimationTest
             _parent = VisualTreeHelper.GetParent(AssociatedObject);
             _self = AssociatedObject;
             _self.RenderTransform = new TranslateTransform();
-            _self.BeginStoryboard(AnimationProducer.GetAnimation(InAnimationType, InAnimation, true, AnimationTimeMS));
+            _self.BeginStoryboard(AnimationProducer.GetAnimation(InAnimation, true, AnimationTimeMS, EasingFunction));
 
 
 
@@ -87,7 +86,7 @@ namespace ModernAnimationTest
             if (source != null && source.CompositionTarget != null)
             {
                 (_parent as IAddChild).AddChild(_self);
-                _story = AnimationProducer.GetAnimation(OutAnimationType, OutAnimation, false, AnimationTimeMS);
+                _story = AnimationProducer.GetAnimation(OutAnimation, false, AnimationTimeMS, EasingFunction);
                 _story.Completed += story_Completed;
                 AssociatedObject.BeginStoryboard(_story);
             }

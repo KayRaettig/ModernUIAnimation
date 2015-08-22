@@ -7,7 +7,6 @@ namespace ModernAnimationTest
 {
     public enum AnimationDirection
     {
-        Unspecified,
         Left,
         Right,
         Top,
