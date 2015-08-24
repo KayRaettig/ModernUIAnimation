@@ -1,0 +1,5 @@
+*.pdb
+ModernAnimationTest/bin/Debug/ModernAnimationTest.exe
+*.suo
+*.cache
+*.lref

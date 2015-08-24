@@ -61,3 +61,4 @@ C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernUIAnimation\ModernUIA
 C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernUIAnimation\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.g.resources
 C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernUIAnimation\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.Properties.Resources.resources
 C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernUIAnimation\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.csproj.GenerateResource.Cache
+C:\Users\karae\Documents\Visual Studio 2012\Projects\ModernUIAnimation\ModernUIAnimation\ModernAnimationTest\obj\Debug\ModernAnimationTest.csprojResolveAssemblyReference.cache
