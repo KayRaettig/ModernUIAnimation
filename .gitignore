@@ -3,3 +3,5 @@ ModernAnimationTest/bin/Debug/ModernAnimationTest.exe
 *.suo
 *.cache
 *.lref
+*.manifest
+ModernAnimationTest.v11.suo
