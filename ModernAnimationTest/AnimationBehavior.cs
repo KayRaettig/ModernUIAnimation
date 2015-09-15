@@ -16,14 +16,16 @@ namespace ModernAnimationTest
     public class AnimationBehavior : Behavior<FrameworkElement>
     {
         private PresentationSource source = null;
-        private DependencyObject _parent = null;
-        private FrameworkElement _self = null;
         private Storyboard _story = null;
 
         public AnimationDirection? InAnimation { get; set; }
         public AnimationDirection? OutAnimation { get; set; }
         public int AnimationTimeMS { get; set; }
         public IEasingFunction EasingFunction { get; set; }
+        
+        public bool TryFindDataContextWhenNested { get; set; } // default value is false
+        public IDataContextProvider DataContextProvider { get; set; }
+        private IOutAnimatable viewModel = null;
 
 
         public AnimationBehavior()
@@ -34,17 +36,58 @@ namespace ModernAnimationTest
 
         protected override void OnAttached()
         {
+            if (DataContextProvider != null)
+            {
+                TryFindDataContextWhenNested = true;
+            }
+            else
+            {
+                DataContextProvider = new DataContextProvider();
+            }
+
+
             AssociatedObject.Loaded += AssociatedObject_Loaded;
             AssociatedObject.Unloaded += AssociatedObject_Unloaded;
-            base.OnAttached();
+
+            if (AssociatedObject.DataContext is IOutAnimatable)
+            {
+                (AssociatedObject.DataContext as IOutAnimatable).RequestOutAnimation +=
+                    AnimationBehavior_RequestOutAnimation;
+
+                viewModel = (AssociatedObject.DataContext as IOutAnimatable);
+            }
+            else
+            {
+                if (TryFindDataContextWhenNested)
+                {
+                    IOutAnimatable dc = DataContextProvider.GetDataContextOfType<IOutAnimatable>(AssociatedObject);
+                    if (dc != null)
+                    {
+                        dc.RequestOutAnimation += AnimationBehavior_RequestOutAnimation;
+                        viewModel = dc;
+                    }
+                }
+                
+            }
+                base.OnAttached();
         }
 
 
+
+
+        /// <summary>
+        /// Do NOT call this function directly.
+        /// It is meant to be called explicitly and exclusively by <ref>story_Completed</ref>
+        /// </summary>
         protected override void OnDetaching()
         {
             AssociatedObject.Loaded -= AssociatedObject_Loaded;
-            _parent = null;
-            _self = null;
+
+            if (viewModel != null)
+            {
+                viewModel.RequestOutAnimation -= AnimationBehavior_RequestOutAnimation;
+            }
+        
             _story = null;
             source = null;
             base.OnDetaching();
@@ -52,77 +95,69 @@ namespace ModernAnimationTest
         }
 
 
-        void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (_self != null)
-            {
-                AssociatedObject.Loaded -= AssociatedObject_Loaded;
-                return;
-            }
-            source = PresentationSource.FromVisual(sender as Visual);
-            source.ContentRendered += source_ContentRendered;
-
-
-        }
-
 
         void source_ContentRendered(object sender, EventArgs e)
         {
             source.ContentRendered -= source_ContentRendered;
+            var ao = AssociatedObject;
 
-            _parent = VisualTreeHelper.GetParent(AssociatedObject);
-            _self = AssociatedObject;
-            _self.RenderTransform = new TranslateTransform();
-            _self.BeginStoryboard(AnimationProducer.GetAnimation(InAnimation, true, AnimationTimeMS, EasingFunction));
+            ao.RenderTransform = new TranslateTransform();
+            ao.BeginStoryboard(AnimationProducer.GetAnimation(InAnimation, true, AnimationTimeMS, EasingFunction));
+        }
 
 
 
+        void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
+        {
+            source = PresentationSource.FromVisual(sender as Visual);
+            source.ContentRendered += source_ContentRendered;
         }
 
         void AssociatedObject_Unloaded(object sender, RoutedEventArgs e)
         {
+            viewModel = null;
             AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
+            Detach();
+        }
+
+
+
+        void AnimationBehavior_RequestOutAnimation()
+        {
 
             if (source != null && source.CompositionTarget != null)
             {
-                (_parent as IAddChild).AddChild(_self);
                 _story = AnimationProducer.GetAnimation(OutAnimation, false, AnimationTimeMS, EasingFunction);
                 _story.Completed += story_Completed;
                 AssociatedObject.BeginStoryboard(_story);
             }
-            else // window is gone
+            else // there is no window anymore, so we'll say goodbye silently
             {
                 Detach();
             }
         }
+
 
         void story_Completed(object sender, EventArgs e)
         {
             _story.Completed -= story_Completed;
             _story = null;
 
-            if (_parent is Panel)
-            {
-                (_parent as Panel).Children.Remove((UIElement)_self);
-            }
-
-            if (_parent is ItemsControl)
-            {
-                (_parent as ItemsControl).Items.Remove(_self);
-            }
-
-            if (_parent is IRemoveChild)
-            {
-                (_parent as IRemoveChild).RemoveChild(_self);
-            }
-
-            _self = null;
+           
             Detach();
         }
 
+
+
+
+        /// <summary>
+        /// Is used to test for memory leaks.
+        /// </summary>
+#if DEBUG
         ~AnimationBehavior()
         {
             Console.WriteLine("Behavior collected!");
         }
+#endif
     }
 }

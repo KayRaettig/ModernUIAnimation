@@ -7,7 +7,7 @@
     <Grid x:Name="mainRoot">
         <StackPanel x:Name="panel">
             <l:Interaction.Behaviors>
-                <at:AnimationBehavior InAnimation="Left"/>
+                <at:AnimationBehavior InAnimation="Left" TryFindDataContextWhenNested="True"/>
             </l:Interaction.Behaviors>
             <TextBlock Text="some ui caption"
                        Margin="15"
