@@ -7,7 +7,7 @@ namespace ModernAnimationTest
 {
     public class TestProvider : IDataContextProvider
     {
-        public T GetDataContextOfType<T>(System.Windows.DependencyObject currentObject)
+        public INotifyOutAnimation GetDataContextOfType(System.Windows.DependencyObject currentObject)
         {
             throw new NotImplementedException();
         }

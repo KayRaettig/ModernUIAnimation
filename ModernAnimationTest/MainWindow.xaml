@@ -6,9 +6,14 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid x:Name="mainRoot">
         <StackPanel x:Name="panel">
-            <l:Interaction.Behaviors>
+            <!--<l:Interaction.Behaviors>
                 <at:AnimationBehavior InAnimation="Left" TryFindDataContextWhenNested="True"/>
-            </l:Interaction.Behaviors>
+            </l:Interaction.Behaviors>-->
+            <at:TestClass>
+                <l:Interaction.Behaviors>
+                    <at:AnimationBehavior/>
+                </l:Interaction.Behaviors>
+            </at:TestClass>
             <TextBlock Text="some ui caption"
                        Margin="15"
                        FontSize="40"

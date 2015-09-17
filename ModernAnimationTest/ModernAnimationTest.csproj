@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TestClass.cs" />
     <Compile Include="TestProvider.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -68,8 +69,7 @@
     <Compile Include="AnimationDirection.cs" />
     <Compile Include="DataContextProvider.cs" />
     <Compile Include="IDataContextProvider.cs" />
-    <Compile Include="IOutAnimatable.cs" />
-    <Compile Include="IRemoveChild.cs" />
+    <Compile Include="INotifyOutAnimation.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

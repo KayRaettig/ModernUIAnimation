@@ -9,11 +9,10 @@ namespace ModernAnimationTest
 {
     public class DataContextProvider : IDataContextProvider
     {
-        public T GetDataContextOfType<T>(DependencyObject currentObject)
+        public INotifyOutAnimation GetDataContextOfType(DependencyObject currentObject)
         {
             bool keepOn = true;
             FrameworkElement tmp = null;
-            T target;
             DependencyObject CurrentObject = currentObject;
 
 
@@ -24,18 +23,16 @@ namespace ModernAnimationTest
                 if (CurrentObject == null)
                 {
                     keepOn = false;
-                    continue;
                 }
                 else
                 {
-                    if (CurrentObject is FrameworkElement && (CurrentObject as FrameworkElement).DataContext is T)
+                    if (CurrentObject is FrameworkElement && (CurrentObject as FrameworkElement).DataContext is INotifyOutAnimation)
                     {
-                        return (T)(CurrentObject as FrameworkElement).DataContext;
+                        return (INotifyOutAnimation)(CurrentObject as FrameworkElement).DataContext;
                     }
                 }
             }
-
-            return default(T);
+            return null;
         }
     }
 }

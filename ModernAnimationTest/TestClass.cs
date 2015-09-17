@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace ModernAnimationTest
 {
-    public interface IRemoveChild
+    public class TestClass : UIElement
     {
-        void RemoveChild(object child);
+        public string Name { get; set; }
+
     }
 }

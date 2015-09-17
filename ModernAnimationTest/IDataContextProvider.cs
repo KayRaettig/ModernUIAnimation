@@ -8,6 +8,6 @@ namespace ModernAnimationTest
 {
     public interface IDataContextProvider
     {
-        T GetDataContextOfType<T>(DependencyObject currentObject);
+        INotifyOutAnimation GetDataContextOfType(DependencyObject currentObject);
     }
 }

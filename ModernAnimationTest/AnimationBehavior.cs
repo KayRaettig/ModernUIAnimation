@@ -13,6 +13,10 @@ using System.Windows.Shapes;
 
 namespace ModernAnimationTest
 {
+    /// <summary>
+    /// T has to be of type FrameworkElement, because at this level
+    /// DataContext and OnLoaded are introduced.
+    /// </summary>
     public class AnimationBehavior : Behavior<FrameworkElement>
     {
         private PresentationSource source = null;
@@ -25,7 +29,7 @@ namespace ModernAnimationTest
         
         public bool TryFindDataContextWhenNested { get; set; } // default value is false
         public IDataContextProvider DataContextProvider { get; set; }
-        private IOutAnimatable viewModel = null;
+        private INotifyOutAnimation _notifyOutAnimation = null;
 
 
         public AnimationBehavior()
@@ -44,27 +48,26 @@ namespace ModernAnimationTest
             {
                 DataContextProvider = new DataContextProvider();
             }
-
-
+            
             AssociatedObject.Loaded += AssociatedObject_Loaded;
             AssociatedObject.Unloaded += AssociatedObject_Unloaded;
 
-            if (AssociatedObject.DataContext is IOutAnimatable)
+            if (AssociatedObject.DataContext is INotifyOutAnimation)
             {
-                (AssociatedObject.DataContext as IOutAnimatable).RequestOutAnimation +=
+                (AssociatedObject.DataContext as INotifyOutAnimation).RequestOutAnimation +=
                     AnimationBehavior_RequestOutAnimation;
 
-                viewModel = (AssociatedObject.DataContext as IOutAnimatable);
+                _notifyOutAnimation = (AssociatedObject.DataContext as INotifyOutAnimation);
             }
             else
             {
                 if (TryFindDataContextWhenNested)
                 {
-                    IOutAnimatable dc = DataContextProvider.GetDataContextOfType<IOutAnimatable>(AssociatedObject);
+                    var dc = DataContextProvider.GetDataContextOfType(AssociatedObject);
                     if (dc != null)
                     {
                         dc.RequestOutAnimation += AnimationBehavior_RequestOutAnimation;
-                        viewModel = dc;
+                        _notifyOutAnimation = dc;
                     }
                 }
                 
@@ -83,9 +86,9 @@ namespace ModernAnimationTest
         {
             AssociatedObject.Loaded -= AssociatedObject_Loaded;
 
-            if (viewModel != null)
+            if (_notifyOutAnimation != null)
             {
-                viewModel.RequestOutAnimation -= AnimationBehavior_RequestOutAnimation;
+                _notifyOutAnimation.RequestOutAnimation -= AnimationBehavior_RequestOutAnimation;
             }
         
             _story = null;
@@ -115,7 +118,7 @@ namespace ModernAnimationTest
 
         void AssociatedObject_Unloaded(object sender, RoutedEventArgs e)
         {
-            viewModel = null;
+            _notifyOutAnimation = null;
             AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
             Detach();
         }

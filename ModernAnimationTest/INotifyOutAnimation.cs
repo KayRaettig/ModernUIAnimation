@@ -6,7 +6,7 @@ using System.Text;
 namespace ModernAnimationTest
 {
     public delegate void OutAnimationRequested();
-    public interface  IOutAnimatable
+    public interface  INotifyOutAnimation
     {
         event OutAnimationRequested RequestOutAnimation;
     }
